@@ -1,22 +1,16 @@
 import gql from 'graphql-tag';
 const typeDefs = gql`
-  type Query {
-    getAllUsers: [User]
-    getUserByName(name: String!): User
-  }
-  type User {
-    id:Int!
-    name: String!,
-    age: Int,
-    male: Boolean!
-  }
-  input UserInput {
-    name: String!,
-    age: Int,
-    male: Boolean!
-  }
-  type Mutation {
-    createUser(user: UserInput!): User
-  }
+type User {
+  id: ID!
+  name: String!
+}
+
+type Query {
+  user(id: ID!): User
+}
+
+type Mutation {
+  createUser(name: String!): User
+}
 `
 export default typeDefs;

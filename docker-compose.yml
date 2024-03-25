@@ -1,0 +1,40 @@
+version: '3'
+services:
+  neo4j_yt:
+    image: neo4j:5.18
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+    volumes:
+      - ./neo4j_data:/data
+    networks:
+      - myytnetwork
+  backend_nodejs_yt:
+    build: .
+    ports:
+      - "4000:4000"
+    networks:
+      - myytnetwork
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:7474"]
+        interval: 30s
+        timeout: 10s
+        retries: 5  
+    restart: on-failure
+    depends_on:
+      - neo4j_yt
+ 
+  ytcache:
+    image: memcached
+    ports:
+      - "11211:11211"
+    command: -m 64
+    networks:
+      - myytnetwork
+
+networks:
+  myytnetwork:
+    driver: bridge
