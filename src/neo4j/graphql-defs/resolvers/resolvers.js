@@ -1,4 +1,3 @@
-import { getUsers, getUserByName, addUser } from '../repositories/user/user_repository.js'
 const resolvers = {
   Query: {
 

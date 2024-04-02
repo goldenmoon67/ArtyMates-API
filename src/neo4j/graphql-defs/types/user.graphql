@@ -1,0 +1,12 @@
+type User {
+  _id: Float!
+  name: String!
+  userId: String!
+  email: String!
+  password: String!
+  nickName: String!
+  country: String
+  city: String
+  watched: [Movie] @relationship(type: "RATED",properties:"RATED" ,direction: "OUT")
+  RATED_rel: [RATED]
+}

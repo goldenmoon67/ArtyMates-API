@@ -1,7 +1,8 @@
 FROM node:alpine 
 WORKDIR /usr/src/app
 COPY package*.json ./
-RUN npm install 
+RUN npm install --fetch-retries=10 --fetch-retry-factor=2 --fetch-retry-mintimeout=20000 --fetch-retry-maxtimeout=60000
+
 RUN npm install -g nodemon
 COPY . .
 EXPOSE 4000

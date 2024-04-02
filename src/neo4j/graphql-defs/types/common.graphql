@@ -1,0 +1,20 @@
+
+
+type Location {
+  country:String!
+  city:String!
+  state: String
+  gps:GpsLocation
+}
+
+type GpsLocation {
+  latitude: String!
+  longitude: String!
+}
+
+type Genre {
+  _id: Float!
+  name: String!
+  movies: [Movie] @relationship(type: "IN_GENRE", direction: "IN")
+  books: [Book] @relationship(type: "IN_GENRE", direction: "IN")
+}
